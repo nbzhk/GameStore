@@ -1,5 +1,6 @@
 package com.example.gamestore.entities;
 
+import com.example.gamestore.entities.userEntities.User;
 import jakarta.persistence.*;
 
 import java.util.HashSet;

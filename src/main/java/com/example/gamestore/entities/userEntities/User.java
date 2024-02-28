@@ -1,5 +1,7 @@
-package com.example.gamestore.entities;
+package com.example.gamestore.entities.userEntities;
 
+import com.example.gamestore.entities.Game;
+import com.example.gamestore.entities.Order;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -22,6 +24,7 @@ public class User {
     private boolean isAdministrator;
     @OneToMany(targetEntity = Order.class, mappedBy = "buyer")
     private Set<Order> orders;
+
 
     public User() {
         games = new HashSet<>();
