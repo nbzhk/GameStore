@@ -1,5 +1,6 @@
 package com.example.gamestore.services.impl;
 
+import com.example.gamestore.entities.userEntities.LoginUserDTO;
 import com.example.gamestore.entities.userEntities.RegisterUserDTO;
 import com.example.gamestore.entities.userEntities.User;
 import com.example.gamestore.exeptions.ValidationException;
@@ -12,10 +13,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
 
+    private User currentLoggedUser;
     private final UserRepository userRepository;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository) {
+        this.currentLoggedUser = null;
         this.userRepository = userRepository;
     }
 
@@ -35,6 +38,22 @@ public class UserServiceImpl implements UserService {
 
 
         return this.userRepository.save(user);
+    }
+
+    @Override
+    public User login(LoginUserDTO loginUser) {
+        if (this.userRepository.findByEmailAndPassword(loginUser.getEmail(), loginUser.getPassword()) == null) {
+            throw new ValidationException(("Wrong email or password."));
+        }
+
+        if (currentLoggedUser != null) {
+            throw new ValidationException("User already logged in");
+        }
+
+        User user = this.userRepository.findByEmailAndPassword(loginUser.getEmail(), loginUser.getPassword());
+
+        this.currentLoggedUser = user;
+        return user;
     }
 }
 
