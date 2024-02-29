@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class GameServiceImpl implements GameService {
@@ -106,5 +107,16 @@ public class GameServiceImpl implements GameService {
     private void updateDescription(String newDescription, int id) {
         this.gameValidator.validateDescription(newDescription);
         this.gameRepository.updateDescription(newDescription, id);
+    }
+
+    @Override
+    public List<Game> allGames() {
+        return this.gameRepository.findAll();
+    }
+
+    @Override
+    public Game findByTitle(String title) {
+        this.gameValidator.validateTitle(title);
+        return this.gameRepository.findByTitle(title);
     }
 }

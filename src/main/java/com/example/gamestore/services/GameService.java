@@ -6,6 +6,8 @@ import com.example.gamestore.entities.gameEntities.Game;
 import com.example.gamestore.exeptions.GameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface GameService {
 
@@ -13,4 +15,8 @@ public interface GameService {
     String delete(DeleteGameDTO game) throws GameNotFoundException;
 
     String edit(int id, String[] values) throws GameNotFoundException;
+
+    List<Game> allGames();
+
+    Game findByTitle(String name);
 }

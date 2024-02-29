@@ -1,5 +1,6 @@
 package com.example.gamestore.services.impl;
 
+import com.example.gamestore.entities.gameEntities.Game;
 import com.example.gamestore.entities.userEntities.LoginUserDTO;
 import com.example.gamestore.entities.userEntities.RegisterUserDTO;
 import com.example.gamestore.entities.userEntities.User;
@@ -9,6 +10,8 @@ import com.example.gamestore.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -54,6 +57,21 @@ public class UserServiceImpl implements UserService {
 
         this.currentLoggedUser = user;
         return user;
+    }
+
+    @Override
+    public User getCurrentLoggedUser() {
+        return currentLoggedUser;
+    }
+
+    @Override
+    public void logout() {
+        this.currentLoggedUser = null;
+    }
+
+    @Override
+    public void purchaseGames(Set<Game> games) {
+
     }
 }
 

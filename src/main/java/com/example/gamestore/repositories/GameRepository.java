@@ -13,6 +13,8 @@ import java.math.BigDecimal;
 public interface GameRepository extends JpaRepository<Game, Integer> {
 
     Game findById(int id);
+
+    Game findByTitle(String title);
     @Modifying
     @Transactional
     @Query("UPDATE games g SET g.title = :newValue WHERE g.id = :id")
